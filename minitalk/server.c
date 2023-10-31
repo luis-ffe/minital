@@ -6,41 +6,38 @@
 /*   By: luis-ffe <luis-ffe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 23:22:42 by luis-ffe          #+#    #+#             */
-/*   Updated: 2023/10/21 23:41:42 by luis-ffe         ###   ########.fr       */
+/*   Updated: 2023/10/31 18:17:27 by luis-ffe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minitalk.h"
+# include "minitalk.h"
 
-void    function(int sig)
+void	handler(int sig)
 {
-    static int i;
-    static unsigned char c;
-
-    /*fazer a manipulação de bits
-    porque isto é camado na estrutura do main e faz a impressao total por bits
-    */
+	char	c;
+	int		i;
+	
+	i = 8;
+	c = 0;
+	while(--i >= 0)
+	{
+		if (sig == SIGUSR1)
+			c |= (1 << i);
+ 		else
+			c |= (0 << i);
+	}
+	write(1, &c, 1);
 }
 
-/* appontamentos caderno ver e  operaçoes de bits
-conseguir o pid e enviar o pid 
-kill para enviar 
-*/
-int main(void)
+int	main(void)
 {
-    struct sigaction s_sigaction;
-    s_sigaction.sa_sigaction = function; ????
-    s_sigaction.sa_flags = SA_SIGINFO;
-    
-    /*
-    imprimir isto:
-    Server PID: nbr \n    
-    */
-
-   sigaction(SIGURS1, &s_sigaction, NULL);
-   sigaction(SIGURS2, &s_sigaction, NULL);
-    while(1)
+	struct sigaction	serv_act;
+	serv_act.sa_handler = &handler;
+	ft_printf("Server PID: %d\n", getpid());
+	while(1)
     {
+		sigaction(SIGUSR1, &serv_act, 0);
+		sigaction(SIGUSR2, &serv_act, 0);
         pause();
     }
     return (0);
