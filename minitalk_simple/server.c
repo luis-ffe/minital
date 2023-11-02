@@ -6,7 +6,7 @@
 /*   By: luis-ffe <luis-ffe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 23:22:42 by luis-ffe          #+#    #+#             */
-/*   Updated: 2023/11/02 06:54:55 by luis-ffe         ###   ########.fr       */
+/*   Updated: 2023/11/02 08:05:19 by luis-ffe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ void	handler(int sig, siginfo_t *info, void *cont)
 	static int				bit = 0;
 
 	(void) cont;
+	(void) info;
 	if (sig == SIGUSR1 || sig == SIGUSR2)
 	{
-		c |= (sig == SIGUSR1) ? (1 << bit) : 0;
+		if (sig == SIGUSR1)
+			c |= (1 << bit);
+		else
+			c |= 0;
 		bit++;
 		if (bit == 8)
 		{

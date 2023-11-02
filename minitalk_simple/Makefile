@@ -1,4 +1,5 @@
 LIBFT = libft/libft.a
+LIBFTPRINTF = libft/ft_printf/libftprintf.a
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
@@ -13,21 +14,26 @@ OBJS_CLIENT = $(SRCS_CLIENT:.c=.o)
 
 all: $(CLIENT) $(SERVER)
 
-$(SERVER): $(LIBFT) 
+$(SERVER): $(OBJS_SERVER) $(LIBFT) $(LIBFTPRINTF)
 	cc $(SRCS_SERVER) $(RUN) -o $@
 
-$(CLIENT): $(LIBFT)
+$(CLIENT): $(OBJS_CLIENT) $(LIBFT) $(LIBFTPRINTF)
 	cc $(SRCS_CLIENT) $(RUN) -o $@
 
 $(LIBFT):
 		${MAKE} -C ./libft
 
+$(LIBFTPRINTF):
+		${MAKE} -C ./libft/ft_printf
+
 clean:
 	$(MAKE) clean -C ./libft
+	$(MAKE) clean -C ./libft/ft_printf
 	rm -rf $(OBJS_SERVER) $(OBJS_CLIENT)
 
 fclean: clean
 	$(MAKE) fclean -C ./libft
+	$(MAKE) fclean -C ./libft/ft_printf
 	rm -rf $(SERVER) $(CLIENT)
 
 re: fclean all

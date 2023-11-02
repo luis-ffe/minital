@@ -6,7 +6,7 @@
 /*   By: luis-ffe <luis-ffe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 23:22:29 by luis-ffe          #+#    #+#             */
-/*   Updated: 2023/11/02 07:07:39 by luis-ffe         ###   ########.fr       */
+/*   Updated: 2023/11/02 08:03:15 by luis-ffe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,11 @@ void	ft_send_msg(pid_t server_pid, char *msg)
 		c = *msg++;
 		while (++bits <= 8)
 		{
-			kill(server_pid, (c & 1) ? SIGUSR1 : SIGUSR2);
-			usleep(100);
+			if (c & 1)
+				kill(server_pid, SIGUSR1);
+			else
+				kill(server_pid, SIGUSR2);
+			usleep(200);
 			c >>= 1;
 		}
 	}
@@ -32,11 +35,15 @@ void	ft_send_msg(pid_t server_pid, char *msg)
 
 void	ft_send_char(pid_t server_pid, unsigned char c)
 {
-	unsigned int	bits = 0;
+	unsigned int	bits;
 
+	bits = 0;
 	while (++bits <= 8)
 	{
-		kill(server_pid, (c & 1) ? SIGUSR1 : SIGUSR2);
+		if (c & 1)
+			kill(server_pid, SIGUSR1);
+		else
+			kill(server_pid, SIGUSR2);
 		usleep(200);
 		c >>= 1;
 	}
@@ -44,8 +51,9 @@ void	ft_send_char(pid_t server_pid, unsigned char c)
 
 void	detect_error(int argc, char **argv)
 {
-	int	i = 0;
+	int	i;
 
+	i = 0;
 	if (argc != 3)
 	{
 		ft_printf("Correct use: ./client [server PID] [message]\n");
