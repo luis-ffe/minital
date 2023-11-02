@@ -6,7 +6,7 @@
 /*   By: luis-ffe <luis-ffe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 10:43:22 by luis-ffe          #+#    #+#             */
-/*   Updated: 2023/11/02 14:22:48 by luis-ffe         ###   ########.fr       */
+/*   Updated: 2023/11/02 16:18:42 by luis-ffe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,14 +59,14 @@ void	detect_error(int argc, char **argv)
 	if (argc != 3)
 	{
 		ft_printf("Correct use: ./client [server PID] [message]\n");
-		return ;
+		exit(EXIT_FAILURE);
 	}
 	while (argv[1][i])
 	{
 		if (!ft_isdigit(argv[1][i++]))
 		{
 			ft_printf("Invalid PID\n");
-			return ;
+			exit(EXIT_FAILURE);
 		}
 	}
 }
