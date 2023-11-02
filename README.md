@@ -80,9 +80,35 @@ If we wanted to change it and keep it changed we would be using <<= or >>= . \
 <code> 0b0000 00001 << 7 </code> is like saying <code> 0b1000 0000 </code> \
 
 # send the char
+To send the char bits one by one:  \
+<code>while the string isnt over
+c = *stringchar;
+bit = 0;
+now, while bit is not 8
+if(C & 0b0000 0001)
+      send SIGUSR1
+else
+      send the SIGUSR2
+bit++;
+c >> 1;
+</code>
+this will always access and compare the the bit most at right from c with 1. (LSB) \
+if they are both 1 then the if statement is true and we send the SIGUSR1 else w send the other;
+then we shift c by one for the next bit of the char to be compared.
 
 # build the char
 <code> c = 0b00000000    or   c = 0  </code>  \
-<code> if i receive SIGUSR1
+<code>if i receive SIGUSR1
 c |= (1 << bit )</code>
+bit will range from 0 to 7 placing the accessed shifted bit in the position corresponding to the bit number. \
+when the char is fully built, that means the bit incremented from 0 to 7 and in the final one more becoming 8. \
+when the signal received is SIGUSR2 we just need to increment the bit or make c |= 0; since that wont change anything. \
+and the incrementation of bit will skip the place where 0 is suposed to be keeping it as a zero. \
+if bit == 8 \
+Print the char and reset the variables to 0, they are now ready to build another char. \
+c = 0; \
+bit = 0; \
+\
+Reach me if you think something isnt clear enough pls! Luis-ffe on 42 slack!
+
 
