@@ -4,10 +4,10 @@ Use make to compile.
 commans working, re, clean, fclean, bonus.
 
 #### Initialize the server you want.
-./server
-./server_bonus
+<code>./server</code>
+<code>./server_bonus</code>
 
 #### Run the client acording to the rules.
-./client
-./client_bonus
+<code>./client</code>
+<code>./client_bonus</code>
 -this will give you further instructions for correct use.
