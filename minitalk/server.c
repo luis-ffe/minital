@@ -6,7 +6,7 @@
 /*   By: luis-ffe <luis-ffe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 23:22:42 by luis-ffe          #+#    #+#             */
-/*   Updated: 2023/11/02 08:05:19 by luis-ffe         ###   ########.fr       */
+/*   Updated: 2023/11/02 11:42:58 by luis-ffe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	set_sigaction(void)
 	struct sigaction	serv_act;
 
 	serv_act.sa_sigaction = &handler;
+	serv_act.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGUSR1, &serv_act, NULL) == -1)
 		exit(EXIT_FAILURE);
 	if (sigaction(SIGUSR2, &serv_act, NULL) == -1)
