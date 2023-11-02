@@ -73,9 +73,9 @@ The same as saying <code> c |= 0b0000 0001 </code> \
 The space in the midle is just to make it easy to read. \
 \
 now we can do this using other operator like the shiffting ones. \
-<code> 0b0000 0001 >> 1 </code> shits one slot to the right all set to 0;
-<code> 0b0000 0001 << 1 </code> is now <code> 0b0000 0010 </code> remember not defenitive... \ 
-if we wanted to change it and keep it changed we would be using <<= or >>= . \
+<code> 0b0000 0001 >> 1 </code> shifts one slot to the right, all are set to 0 now;
+<code> 0b0000 0001 << 1 </code> is now <code> 0b0000 0010 </code> remember not defenitive.  \  
+If we wanted to change it and keep it changed we would be using <<= or >>= . \
 <code> 0b0000 00001 << 4 </code> is like saying <code> 0b00001 0000 </code> \
 <code> 0b0000 00001 << 7 </code> is like saying <code> 0b1000 0000 </code> \
 
