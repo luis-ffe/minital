@@ -101,7 +101,9 @@ then we shift c by one for the next bit of the char to be compared.
 <code>if i receive SIGUSR1
 c |= (1 << bit )</code>
 bit will range from 0 to 7 placing the accessed shifted bit in the position corresponding to the bit number. \
-when the char is fully built, that means the bit incremented from 0 to 7 and in the final one more becoming 8. \
+<code>bits  -  0000 0000   total bits= 8
+position 7654 3210   total pos = 8 </code> \
+when the char is fully built, that means the bit incremented from 0 to 7 and in the last iteration increments once more ending at 8. \
 when the signal received is SIGUSR2 we just need to increment the bit or make c |= 0; since that wont change anything. \
 and the incrementation of bit will skip the place where 0 is suposed to be keeping it as a zero. \
 if bit == 8 \
