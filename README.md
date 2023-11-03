@@ -1,7 +1,7 @@
 ## Use instructions:
 
 Use make to compile. \
-commans working, re, clean, fclean, bonus. \
+commans working, re, clean, fclean, bonus. 
 
 #### Initialize the server you want.
 <code>./server</code> \
