@@ -10,7 +10,7 @@ commans working, re, clean, fclean, bonus. \
 #### Run the client acording to the rules.
 <code>./client</code> \
 <code>./client_bonus</code> \
--this will give you further instructions for correct use. \
+this will give you further instructions for correct use. 
 
 ## Explanation
 
@@ -40,7 +40,7 @@ Make sure you handle errors smoothly. \
 \
 The Bonus client will send the null char of the string to the server and that trigers the server to send SIGUSR1 Signal to the client. \
 The client receives it, and with the same mechanism as the server executes the  <code> sigactions.sa_sigaction  </code>  associated function. \
-Printing the aknowledgement message and exiting the program properly.
+Printing the aknowledgement message and exiting the program properly. 
 
 ## BIT manipulations in minitalk
 1 byte == 8 bits \
@@ -73,7 +73,7 @@ The same as saying <code> c |= 0b0000 0001 </code> \
 The space in the midle is just to make it easy to read. \
 \
 now we can do this using other operator like the shiffting ones. \
-<code> 0b0000 0001 >> 1 </code> shifts one slot to the right, all are set to 0 now;
+<code> 0b0000 0001 >> 1 </code> shifts one slot to the right, all are set to 0 now;  \
 <code> 0b0000 0001 << 1 </code> is now <code> 0b0000 0010 </code> remember not defenitive.  \  
 If we wanted to change it and keep it changed we would be using <<= or >>= . \
 <code> 0b0000 00001 << 4 </code> is like saying <code> 0b00001 0000 </code> \
@@ -91,15 +91,15 @@ else
       send the SIGUSR2
 bit++;
 c >> 1;
-</code>
+</code> \
 this will always access and compare the the bit most at right from c with 1. (LSB) \
-if they are both 1 then the if statement is true and we send the SIGUSR1 else w send the other;
+if they are both 1 then the if statement is true and we send the SIGUSR1 else will send the other; \
 then we shift c by one for the next bit of the char to be compared.
 
 # build the char
 <code> c = 0b00000000    or   c = 0  </code>  \
 <code>if i receive SIGUSR1
-c |= (1 << bit )</code>
+c |= (1 << bit )</code> \
 bit will range from 0 to 7 placing the accessed shifted bit in the position corresponding to the bit number. \
 <code>bits  -  0000 0000   total bits= 8
 position 7654 3210   total pos = 8 </code> \
