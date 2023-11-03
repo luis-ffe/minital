@@ -33,9 +33,9 @@ The signal action is turned on once the signal is received. \
 <code>Sigaction(SIGUSR1, &name, NULL); </code> \
 <code>Sigaction(SIGUSR2, &name, NULL); </code> \
 These will run everytime a signal is received and start processing signal in the server one at a time while the client keeps sending them. \
-Keep in mind computers are fast give some spacing between signals using </code> usleep(50); </code> \ 
+Keep in mind computers are fast give some spacing between signals using </code> usleep(50) </code>  \ 
 The variables are set as static conserving value and scope for multiple "executions" of the function <code> &your_function;  </code>  \
-One byte is 8 bits so when the bit counter is 8 a condition checkings it and prints the char and resets the variables. \
+One byte is 8 bits so when the bit counter is 8 a condition checks it and prints the char then resets the variables. \
 Make sure you handle errors smoothly. \
 \
 The Bonus client will send the null char of the string to the server and that trigers the server to send SIGUSR1 Signal to the client. \
