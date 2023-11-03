@@ -55,8 +55,8 @@ Hexadecimal \
 Or you can just use 0 or 1 \
 When operating bits the format you show them in your code is your choice, in the end they will all be 0s or 1s . \
 For this project i used the bitwise operator  <code> | </code> (or)  and  <code> & </code> (and). \
-
-<code> 0b000000001  |  0b00000000 </code>  is the same as saying (1 | 0) it works much like 1 + 0.
+\
+<code> 0b000000001  |  0b00000000 </code>  is the same as saying (1 | 0) it works much like 1 + 0. \
 <code> 0b000000001  &  0b00000000 </code>  is the same as saying (1 & 0) the result is 0 (trick just think & compares if the bits are equal and if they are not it the bit is set to zero. \
 Else.... the bit remains 1. This will come in handy in boolean functions or statements. \
 \
