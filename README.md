@@ -20,6 +20,13 @@ The client will provide further instructions for correct use.
 
 ## Explanation
 
+Explore these libs.
+```c
+#include <signal.h>
+#include <uchar.h>
+#include <sys/types.h>
+```
+
 This project will help you understand bit operations and signal handling in C. My choice was to use `sigaction` for both the mandatory and bonus parts. `sigaction`'s structure ensures reliable behavior across different software versions, whereas using signals directly might be more error-prone.
 
 To use `sigaction`, start by initializing it:
