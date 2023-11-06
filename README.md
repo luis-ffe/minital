@@ -59,7 +59,7 @@ The bonus client sends the null character of the string to the server, triggerin
 
 ## Bit Manipulations in Minitalk
 
-1 byte is equivalent to 8 bits. 100 characters are 800 bits, and with a 1,000,000μs (microseconds) delay using 50μs as spacing, you can theoretically send 2500 characters per second.
+1 byte is equivalent to 8 bits. 100 characters are 800 bits, and with a 1,000,000μs (microseconds) using a delay of 50μs as spacing, you can theoretically send 2500 characters per second.
 
 ### Bit Literals and Hexadecimal
 
@@ -77,8 +77,8 @@ In this project, bitwise operators such as `|` (OR) and `&` (AND) are used for b
 - `0b00000001 | 0b00000000` is the same as `1 | 0`, which is similar to 1 + 0.
 - `0b00000001 & 0b00000000` is the same as `1 & 0`, resulting in 0.
 
-The `&` operator compares if the bits are equal and sets the bit to 0 if they are not. Otherwise, the bit remains 1, which is useful for boolean functions or statements.
-
+The `&` operator compares if the bits are equal and sets the bit to 0 if they are not. Otherwise, the bit remains 1, which is useful for boolean functions or statements. \
+There ar multiple ways of solving the problem given and you can manipulate the bits in whatever way you want. If it works it isnt stupid.
 ### Sending a Character
 
 To send the bits of a character one by one:
@@ -115,4 +115,6 @@ bit = 0;
 ```
 
 Feel free to reach out if you find any part unclear or have questions. You can contact me on 42 slack or via email. User: luis-ffe
+
+[Bit Manipulation Cheat Sheet by kushagra414](https://github.com/kushagra414/Dynamic-Programming/blob/master/Bit%20Manipulation%20Cheat%20Sheet.md)
 
