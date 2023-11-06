@@ -27,14 +27,19 @@ To use `sigaction`, start by initializing it:
 struct sigaction name;
 
 After that, set the `sa_sigaction` component of the `sigaction` structure to point to your custom function:
+
+```c
 name.sa_sigaction = &your_function;
+```
 
 This custom function, declared by me, handles each character of the message to be sent. It sends each bit one by one, as described in the "Bit Processing" section below.
 
 To keep the server running, I used a loop with the pause() function inside it. This keeps the program in a resting state until a signal is received. The signal action is activated once a signal is received:
 
+```C
 sigaction(SIGUSR1, &name, NULL);
 sigaction(SIGUSR2, &name, NULL);
+```
 
 These signal actions run every time a signal is received and start processing signals in the server one at a time while the client keeps sending them. Be mindful that computers are fast, so consider adding some spacing between signals using `usleep(50)`.
 
@@ -70,6 +75,7 @@ The `&` operator compares if the bits are equal and sets the bit to 0 if they ar
 
 To send the bits of a character one by one:
 
+```c
 while the string isn't over:
     c = *stringchar;
     bit = 0;
@@ -81,6 +87,7 @@ while the string isn't over:
             send SIGUSR2;
         bit++;
         c >> 1;
+```
 
 This code accesses and compares the rightmost bit (LSB) of `c` with 1. If they are both 1, the `if` statement is true, and `SIGUSR1` is sent. Otherwise, `SIGUSR2` is sent. Then, `c` is shifted by one to compare the next bit of the character.
 
@@ -89,13 +96,15 @@ This code accesses and compares the rightmost bit (LSB) of `c` with 1. If they a
 Start with `c = 0b00000000` (or `c = 0`). If you receive `SIGUSR1`, update `c` as follows:
 
 ```c
-c |= (1 << bit)
+c |= (1 << bit);
+```
 
-Here, `bit` ranges from 0 to 7, placing the shifted bit in the corresponding position. When `bit` reaches 8, the character is fully built. If `SIGUSR2` is received, increment `bit`, or set `c |= 0`, as it won't change anything. When `bit` equals 8, print the character, and reset the variables to 0 to prepare for building another character:
+Here, bit ranges from 0 to 7, placing the shifted bit in the corresponding position. When bit reaches 8, the character is fully built. If SIGUSR2 is received, increment bit, or set c |= 0, as it won't change anything. When bit equals 8, print the character, and reset the variables to 0 to prepare for building another character.
 
-```markdown
+```c
 c = 0;
 bit = 0;
+```
 
 Feel free to reach out if you find any part unclear or have questions. You can contact me on 42 slack or via email. User: luis-ffe
 
