@@ -57,6 +57,8 @@ The variables are set as static, preserving their values and scope for multiple 
 
 The bonus client sends the null character of the string to the server, triggering the server to send a `SIGUSR1` signal back to the client. The client receives it and uses the same mechanism as the server to execute the `sigaction.sa_sigaction` associated function, printing the acknowledgment message and exiting the program correctly.
 
+Before advancing much more you should try to look for the information and solve the problem without seeing the code snippets bellow as that will hinder your progress and make you a not so good programmer. Try to study and dive deep in the subject.
+
 ## Bit Manipulations in Minitalk
 
 1 byte is equivalent to 8 bits. 100 characters are 800 bits, and with a 1,000,000μs (microseconds) using a delay of 50μs as spacing, you can theoretically send 2500 characters per second.
