@@ -27,7 +27,7 @@ Explore these libs.
 #include <uchar.h>
 #include <sys/types.h>
 ```
-\
+
 
 Linux Terminal: `man sigaction` , `man signal` \
 Read that first. 
