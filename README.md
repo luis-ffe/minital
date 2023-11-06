@@ -17,6 +17,7 @@ Execute the client according to the rules using one of these commands:
 - `./client_bonus`
 
 The client will provide further instructions for correct use.
+Remember that `!` triggers a specific terminal action so try not to use it.
 
 ## Explanation
 
