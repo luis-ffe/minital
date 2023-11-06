@@ -27,9 +27,10 @@ Explore these libs.
 #include <uchar.h>
 #include <sys/types.h>
 ```
+\
 
 Linux Terminal: `man sigaction` , `man signal` \
-Read that first. \
+Read that first. 
 
 
 This project will help you understand bit operations and signal handling in C. My choice was to use `sigaction` for both the mandatory and bonus parts. `sigaction`'s structure ensures reliable behavior across different software versions, whereas using signals directly might be more error-prone.
