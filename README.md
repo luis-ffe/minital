@@ -1,116 +1,101 @@
-## Use instructions:
+## Use Instructions:
 
-Use make to compile. \
-commans working, re, clean, fclean, bonus. 
+Use the provided makefile for compilation. The following commands are available: `make`, `re`, `clean`, `fclean`, and `bonus`.
 
-#### Initialize the server you want.
-<code>./server</code> \
-<code>./server_bonus</code> 
+### Initialize the server:
 
-#### Run the client acording to the rules.
-<code>./client</code> \
-<code>./client_bonus</code> \
-this will give you further instructions for correct use. 
+To start the server, use one of the following commands:
+
+- `./server`
+- `./server_bonus`
+
+### Run the client:
+
+Execute the client according to the rules using one of these commands:
+
+- `./client`
+- `./client_bonus`
+
+The client will provide further instructions for correct use.
 
 ## Explanation
 
-This project will make you learn about bit operations and signals in c. \
-My choice was to use sigaction for both the mandatory and bonus. \
-Sigaction's structur makes it have a solid comportment in most softwere version and signal would be more prone to errors. \
-\
-To use sigaction first initialize it. \
-<code>.struct sigaction name; </code> \
-After that i set sigactions component sa_sigaction to the &function. \
-<code>name.sa_sigaction = &your_function;  </code>  \
-This function is declared by me and it handles each character of the message to be sent \
-It will send each bit by bit, See how in the BIT PROCESSING part down below. \
-\
-To keep the server up i used. \
-<code> pause(); </code>  \
-Inside a while(true) loop. \
-This keeps the program at rest until a signal is received. \
-The signal action is turned on once the signal is received. \
-<code>Sigaction(SIGUSR1, &name, NULL); </code> \
-<code>Sigaction(SIGUSR2, &name, NULL); </code> \
-These will run everytime a signal is received and start processing signal in the server one at a time while the client keeps sending them. \
-Keep in mind computers are fast give some spacing between signals using </code> usleep(50) </code>  \ 
-The variables are set as static conserving value and scope for multiple "executions" of the function <code> &your_function;  </code>  \
-One byte is 8 bits so when the bit counter is 8 a condition checks it and prints the char then resets the variables. \
-Make sure you handle errors smoothly. \
-\
-The Bonus client will send the null char of the string to the server and that trigers the server to send SIGUSR1 Signal to the client. \
-The client receives it, and with the same mechanism as the server executes the  <code> sigactions.sa_sigaction  </code>  associated function. \
-Printing the aknowledgement message and exiting the program properly. 
+This project will help you understand bit operations and signal handling in C. My choice was to use `sigaction` for both the mandatory and bonus parts. `sigaction`'s structure ensures reliable behavior across different software versions, whereas using signals directly might be more error-prone.
 
-## BIT manipulations in minitalk
-1 byte == 8 bits \
-100 chars are 800 bits, 1 000 000u (microseconds) using 50u as spacing lets you send theoretically 2500 chars per secund. \
-\
-Bit literals \
-<code>0b00000000</code> == 0 \
-<code>0b00000001</code> == 1 \
-Hexadecimal \
-<code>0x00</code> == 0 \
-<code>0x01</code> == 1 \
-Or you can just use 0 or 1 \
-When operating bits the format you show them in your code is your choice, in the end they will all be 0s or 1s . \
-For this project i used the bitwise operator  <code> | </code> (or)  and  <code> & </code> (and). \
-\
-<code> 0b000000001  |  0b00000000 </code>  is the same as saying (1 | 0) it works much like 1 + 0. \
-<code> 0b000000001  &  0b00000000 </code>  is the same as saying (1 & 0) the result is 0 (trick just think & compares if the bits are equal and if they are not it the bit is set to zero. \
-Else.... the bit remains 1. This will come in handy in boolean functions or statements. \
-\
-<code> char c = 0b000000001  </code>  the same as saying c = 1; or c = 0x01; \
-<code> c  &  0b00000000 </code>  is the same as saying <code>c & 0;</code> or <code>c & 0x00;</code> \
-all this expression have one thing in common. None of them changes the value of c.  \
-Just like <code> x = 1 and y = 2  </code>    if you do <code> x + y </code> you access the operation value but you dont change any of the imputs. \
-\
-Let c = 0; \
-<code> c |= 1 </code>  c is now 1 we set the LSB (the bit at the right end) to 1. \
-We changed it! \
-The same as saying <code> c |= 0b0000 0001 </code> \
-\
-The space in the midle is just to make it easy to read. \
-\
-now we can do this using other operator like the shiffting ones. \
-<code> 0b0000 0001 >> 1 </code> shifts one slot to the right, all are set to 0 now;  \
-<code> 0b0000 0001 << 1 </code> is now <code> 0b0000 0010 </code> remember not defenitive.  
-If we wanted to change it and keep it changed we would be using <<= or >>= . \
-<code> 0b0000 00001 << 4 </code> is like saying <code> 0b00001 0000 </code> \
-<code> 0b0000 00001 << 7 </code> is like saying <code> 0b1000 0000 </code> 
+To use `sigaction`, start by initializing it:
 
-# send the char
-To send the char bits one by one:  \
-<code>while the string isnt over
-c = *stringchar;
+struct sigaction name;
+
+After that, set the `sa_sigaction` component of the `sigaction` structure to point to your custom function:
+name.sa_sigaction = &your_function;
+
+This custom function, declared by me, handles each character of the message to be sent. It sends each bit one by one, as described in the "Bit Processing" section below.
+
+To keep the server running, I used a loop with the pause() function inside it. This keeps the program in a resting state until a signal is received. The signal action is activated once a signal is received:
+
+sigaction(SIGUSR1, &name, NULL);
+sigaction(SIGUSR2, &name, NULL);
+
+These signal actions run every time a signal is received and start processing signals in the server one at a time while the client keeps sending them. Be mindful that computers are fast, so consider adding some spacing between signals using `usleep(50)`.
+
+The variables are set as static, preserving their values and scope for multiple "executions" of the `your_function`. One byte consists of 8 bits, so when the bit counter reaches 8, a condition checks it and prints the character. After that, the variables are reset. It's essential to handle errors gracefully.
+
+### Bonus Client
+
+The bonus client sends the null character of the string to the server, triggering the server to send a `SIGUSR1` signal back to the client. The client receives it and uses the same mechanism as the server to execute the `sigaction.sa_sigaction` associated function, printing the acknowledgment message and exiting the program correctly.
+
+## Bit Manipulations in Minitalk
+
+1 byte is equivalent to 8 bits. 100 characters are 800 bits, and with a 1,000,000μs (microseconds) delay using 50μs as spacing, you can theoretically send 2500 characters per second.
+
+### Bit Literals and Hexadecimal
+
+You can represent bits in code using binary literals or hexadecimal notation:
+
+- Binary: `0b00000000` is equivalent to 0, and `0b00000001` is equivalent to 1.
+- Hexadecimal: `0x00` is 0, and `0x01` is 1.
+
+You can also use 0 and 1 directly.
+
+### Bitwise Operators
+
+In this project, bitwise operators such as `|` (OR) and `&` (AND) are used for bit manipulation.
+
+- `0b00000001 | 0b00000000` is the same as `1 | 0`, which is similar to 1 + 0.
+- `0b00000001 & 0b00000000` is the same as `1 & 0`, resulting in 0.
+
+The `&` operator compares if the bits are equal and sets the bit to 0 if they are not. Otherwise, the bit remains 1, which is useful for boolean functions or statements.
+
+### Sending a Character
+
+To send the bits of a character one by one:
+
+while the string isn't over:
+    c = *stringchar;
+    bit = 0;
+    
+    while bit is not 8:
+        if (c & 0b00000001)
+            send SIGUSR1;
+        else
+            send SIGUSR2;
+        bit++;
+        c >> 1;
+
+This code accesses and compares the rightmost bit (LSB) of `c` with 1. If they are both 1, the `if` statement is true, and `SIGUSR1` is sent. Otherwise, `SIGUSR2` is sent. Then, `c` is shifted by one to compare the next bit of the character.
+
+### Building the Character
+
+Start with `c = 0b00000000` (or `c = 0`). If you receive `SIGUSR1`, update `c` as follows:
+
+```c
+c |= (1 << bit)
+
+Here, `bit` ranges from 0 to 7, placing the shifted bit in the corresponding position. When `bit` reaches 8, the character is fully built. If `SIGUSR2` is received, increment `bit`, or set `c |= 0`, as it won't change anything. When `bit` equals 8, print the character, and reset the variables to 0 to prepare for building another character:
+
+```markdown
+c = 0;
 bit = 0;
-now, while bit is not 8
-if(C & 0b0000 0001)
-      send SIGUSR1
-else
-      send the SIGUSR2
-bit++;
-c >> 1;
-</code> \
-this will always access and compare the the bit most at right from c with 1. (LSB) \
-if they are both 1 then the if statement is true and we send the SIGUSR1 else will send the other; \
-then we shift c by one for the next bit of the char to be compared.
 
-# build the char
-<code> c = 0b00000000    or   c = 0  </code>  \
-<code>if i receive SIGUSR1
-c |= (1 << bit )</code> \
-bit will range from 0 to 7 placing the accessed shifted bit in the position corresponding to the bit number. \
-<code>bits  -  0000 0000   total bits= 8
-position 7654 3210   total pos = 8 </code> \
-when the char is fully built, that means the bit incremented from 0 to 7 and in the last iteration increments once more ending at 8. \
-when the signal received is SIGUSR2 we just need to increment the bit or make c |= 0; since that wont change anything. \
-and the incrementation of bit will skip the place where 0 is suposed to be keeping it as a zero. \
-if bit == 8 \
-Print the char and reset the variables to 0, they are now ready to build another char. \
-c = 0; \
-bit = 0; \
-\
-Reach me if you think something isnt clear enough pls! Luis-ffe on 42 slack!
-
+Feel free to reach out if you find any part unclear or have questions. You can contact me on 42 slack or via email. User: luis-ffe
 
